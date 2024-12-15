@@ -1,6 +1,6 @@
 {
   "name": "ts-hello-world",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A sample npm library in TypeScript bundled with Rollup",
   "repository": {
     "type": "git",
