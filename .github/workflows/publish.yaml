@@ -5,23 +5,7 @@ on:
     types: [created]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-          run_install: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: pnpm install
-      - run: pnpm run build
-      - run: pnpm test
-
-  publish-npm:
-    needs: build
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,6 +19,8 @@ jobs:
           registry-url: https://registry.npmjs.org/
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - run: pnpm test
       - run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
